@@ -90,6 +90,7 @@ end.on('click', endSession);
 
 function endSession() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  randomObstacleGenerator( numObstacles );
 }
 
 
