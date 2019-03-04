@@ -39,6 +39,13 @@ canvas.onmousedown = function (e)  {
     isDown = true;
 }
 
+//When the mouse moves out of the game-zone:
+canvas.onmouseout = function (e)  {
+  e.preventDefault();
+  e.stopPropagation();
+  isDown = false;
+}
+
 canvas.onmousemove = function (e)  {
     if (!isDown) {
         return;
