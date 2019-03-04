@@ -13,6 +13,23 @@
         <div class="canvas-wrapper"></div>
       </div>
       <div class="side-section">
+        <div class="form-wrapper clearfix">
+          <form id="obstacle-form">
+            <div class="input-field">
+                <legend for="num-obstacles">Number of obstacles</legend>
+                <input id="num-obstacles" name="numObstacles" type="number" placeholder="Enter the number of obstacles" max="20">
+            </div>
+            <div class="input-field min-field">
+                <legend for="min-obstacle-radius">Min obstacle radius</legend>
+                <input id="min-obstacle-radius" name="minObstacleRadius" type="number" placeholder="MIN" min="0">
+            </div>
+            <div class="input-field max-field">
+                <legend for="max-obstacle-radius">Max obstacle radius</legend>
+                <input id="max-obstacle-radius" name="maxObstacleRadius" type="number" placeholder="MAX" max="20">
+            </div>
+            <input class="btn btn-submit" type="submit" value="Start"> </input>
+          </form>
+        </div>
         <div class="btn btn-end">End Session</div>
         <div class="display"></div>
       </div>

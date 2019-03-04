@@ -2,13 +2,34 @@ var game = $(".canvas-wrapper");
 var display = $(".display");
 var gameSection = $(".game-section");
 var end = $(".btn-end");
+var submit = $(".btn-submit");
+var obsForm = $('#obstacle-form')
 var isMouseDown = false;
+
+
+obsForm.submit(function(e) {
+  // Get all the forms elements and their values in one step
+  e.preventDefault();
+  var $inputs = $('#obstacle-form :input');
+  var values = {};
+  $inputs.each(function() {
+    if( $(this).attr('type') != "submit" ) {
+      values[this.name] = $(this).val();
+    }
+  });
+  numObstacles = parseInt( values["numObstacles"] );
+  maxObstacleRadius = parseInt( values["maxObstacleRadius"] );
+  minObstacleRadius = parseInt( values["minObstacleRadius"] );
+  clearGame();
+  randomObstacleGenerator( numObstacles );
+});
+
 
 /*********************** CANVAS ***************************** */
 var canvasHeight = game.height();
 var canvasWidth = game.width();
-var maxObstacleSize = 20;
-var minObstacleSize = 5;
+var maxObstacleRadius = 20;
+var minObstacleRadius = 5;
 var numObstacles = 10;
 var obstaclesArray = [];
 game.append('<canvas id="game-canvas" width="'+canvasWidth+'" height="'+canvasHeight+'"></canvas>');
@@ -89,12 +110,14 @@ function getOffset(element) {
 end.on('click', endSession);
 
 function endSession() {
+  clearGame();
+}
+
+function clearGame() {
   ctx.beginPath();
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   ctx.closePath();
-  randomObstacleGenerator( numObstacles );
 }
-
 
 function reverseYaxis( ycord ) {
    return parseInt( canvasHeight - ycord );
@@ -110,10 +133,11 @@ function createCircle(centerX, centerY, radius) {
 }
 
 function randomObstacleGenerator(num) {
+  debugger;
     while(num) {
       x = parseInt( Math.random() * canvasWidth );
       y = parseInt( Math.random() * canvasHeight );
-      r = parseInt( Math.random() * (maxObstacleSize - minObstacleSize) + minObstacleSize );
+      r = parseInt( Math.random() * (maxObstacleRadius - minObstacleRadius) + minObstacleRadius );
       if( isValidObstacle(x,y,r) ) {
         createCircle(x,y,r);
         obstaclesArray.push({x,y,r});
@@ -129,4 +153,4 @@ function isValidObstacle() {
      return false;
   }
 }
-randomObstacleGenerator( numObstacles );
+

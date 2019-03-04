@@ -1,3 +1,4 @@
+ /************ Global *****************/
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +7,19 @@
 
 body {
   overflow-x: hidden;
+}
+
+legend {
+  color: #ECDB54;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+input {
+  width: 100%;
+  height: 35px;
+  padding-left: 4px;
+  font-size: 14px;
 }
 
 .clearfix:after, .clearfix:before {
@@ -22,10 +36,44 @@ body {
   margin-left: 50%;
   margin-top: 20px;
   transform: translate(-50%, 0); 
+  transition: .3s all ease-in-out;
 }
+ .btn:hover {
+   background: #ECDB54;
+   color: #6B5B95;
+   transform: translate(-50%, 0) scale(1.04); 
+ }
+
+
+ /************ Local *****************/
+ .min-field {
+  width: 40%;
+  float: left;
+ }
+
+ .max-field {
+  width: 40%;
+  float: right;
+ }
 
 .container {
   height: 100vh;
+  
+}
+
+.form-wrapper{
+  width: 80%;
+  margin: 30px auto;
+}
+
+.input-field{
+  padding: 4px 0;
+}
+
+.btn-submit {
+  background: #6B5B95;
+  font-size: 14px;
+  padding: 0;
 }
 
 .game-section {
