@@ -43,11 +43,13 @@ body {
   background-color: #6B5B95;
 }
 
-.game {
-  margin: 50px;
+.canvas-wrapper {
   border: 2px solid #6B5B95;
-  width: calc( 100% - 100px );
-  height: calc( 100% - 100px );
+  width: 800px;
+  height: 800px;
+  margin: auto;
+  margin-top: 60px;
+  box-sizing: content-box;
 }
 
 .display {
