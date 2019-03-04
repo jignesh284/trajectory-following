@@ -89,7 +89,9 @@ function getOffset(element) {
 end.on('click', endSession);
 
 function endSession() {
+  ctx.beginPath();
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  ctx.closePath();
   randomObstacleGenerator( numObstacles );
 }
 
@@ -100,6 +102,7 @@ function reverseYaxis( ycord ) {
 
 
 function createCircle(centerX, centerY, radius) {
+   ctx.beginPath();
    ctx.arc(centerX, centerY, radius, 0, 2*Math.PI);
    ctx.fillStyle = "blue";
    ctx.fill();
@@ -127,5 +130,3 @@ function isValidObstacle() {
   }
 }
 randomObstacleGenerator( numObstacles );
-// createCircle( 200, 200, 10);
-// createCircle( 220, 180, 20);
