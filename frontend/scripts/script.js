@@ -7,6 +7,10 @@ var isMouseDown = false;
 /*********************** CANVAS ***************************** */
 var canvasHeight = game.height();
 var canvasWidth = game.width();
+var maxObstacleSize = 20;
+var minObstacleSize = 5;
+var numObstacles = 10;
+var obstaclesArray = [];
 game.append('<canvas id="game-canvas" width="'+canvasWidth+'" height="'+canvasHeight+'"></canvas>');
 var canvas = document.getElementById("game-canvas");
 console.log(canvas);
@@ -22,7 +26,7 @@ function drawLine(x, y) {
     ctx.beginPath();
     ctx.moveTo(startX, startY);
     ctx.lineTo(x, y);
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1;
     ctx.strokeStyle = "red";
     ctx.closePath();
     ctx.stroke();
@@ -54,7 +58,7 @@ canvas.onmousemove = function (e)  {
     e.stopPropagation();
     mouseX = parseInt(e.clientX - offsetX);
     mouseY = parseInt(e.clientY - offsetY);
-    display.html(' (  X :: <font color="white">'+mouseX+'</font> , Y :: <font color="white">'+ parseInt( canvasHeight - mouseY) +'</font> )');
+    display.html(' (  X :: <font color="white">'+mouseX+'</font> , Y :: <font color="white">'+ reverseYaxis( mouseY ) +'</font> )');
     drawLine(mouseX, mouseY);
     startX = mouseX;
     startY = mouseY;
@@ -87,3 +91,40 @@ end.on('click', endSession);
 function endSession() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 }
+
+
+function reverseYaxis( ycord ) {
+   return parseInt( canvasHeight - ycord );
+}
+
+
+function createCircle(centerX, centerY, radius) {
+   ctx.arc(centerX, centerY, radius, 0, 2*Math.PI);
+   ctx.fillStyle = "blue";
+   ctx.fill();
+   ctx.closePath();
+}
+
+function randomObstacleGenerator(num) {
+    while(num) {
+      x = parseInt( Math.random() * canvasWidth );
+      y = parseInt( Math.random() * canvasHeight );
+      r = parseInt( Math.random() * (maxObstacleSize - minObstacleSize) + minObstacleSize );
+      if( isValidObstacle(x,y,r) ) {
+        createCircle(x,y,r);
+        obstaclesArray.push({x,y,r});
+        num--;
+      } 
+    }
+}
+
+function isValidObstacle() {
+  if( (x-r) > 0 && (y-r) > 0 && (x+r) < canvasWidth && (y+r) < canvasHeight ) {
+      return true;
+  } else {
+     return false;
+  }
+}
+randomObstacleGenerator( numObstacles );
+// createCircle( 200, 200, 10);
+// createCircle( 220, 180, 20);
